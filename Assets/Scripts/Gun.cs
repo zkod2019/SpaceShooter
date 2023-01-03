@@ -26,9 +26,9 @@ public class Gun : MonoBehaviour
             bullet.GetComponent<Rigidbody>().velocity = BulletPlacement.forward * bulletSpeed;
         }
 
-        if(Input.GetMouseButton(0)){
-          transform.eulerAngles += moveSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), z:0);
-        }        
+        // if(Input.GetMouseButton(0)){
+        //   transform.eulerAngles += moveSpeed * new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), z:0);
+        // }        
 
     }
 
