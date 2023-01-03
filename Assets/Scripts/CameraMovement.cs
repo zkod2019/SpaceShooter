@@ -12,13 +12,16 @@ public class CameraMovement : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;   
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        y = Input.GetAxis("Horizontal");
-        x = Input.GetAxis("Vertical");
+        y = Input.GetAxis("Mouse X");
+        //x = Input.GetAxis("Mouse Y");
+        x = Mathf.Clamp(Input.GetAxis("Mouse Y"), -135f, 45f);
+
         rotate = new Vector3(x, y * sensitivity, 0);
         transform.eulerAngles = transform.eulerAngles - rotate;
     }
