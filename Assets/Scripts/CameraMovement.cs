@@ -4,25 +4,31 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    private float x;
-    private float y;
-    public float sensitivity = -1f;
-    private Vector3 rotate;
-    // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;   
+   public float sensX;
+    public float sensY;
+
+    public Transform orientation;
+
+    float xRotation;
+    float yRotation;
+    float mouseX;
+    float mouseY;
+
+    private void Start(){
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        y = Input.GetAxis("Mouse X");
-        //x = Input.GetAxis("Mouse Y");
-        x = Mathf.Clamp(Input.GetAxis("Mouse Y"), -135f, 45f);
+    private void Update(){
+        yRotation += mouseX;
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    } 
 
-        rotate = new Vector3(x, y * sensitivity, 0);
-        transform.eulerAngles = transform.eulerAngles - rotate;
+    private void LateUpdate(){
+        mouseX = Input.GetAxisRaw("Mouse X") * Time.fixedDeltaTime * sensX;
+        mouseY = Input.GetAxisRaw("Mouse Y") * Time.fixedDeltaTime * sensY;
     }
 }
